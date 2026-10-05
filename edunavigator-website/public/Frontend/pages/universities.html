@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Universities — EduNavigator</title>
+<meta name="description" content="Browse and filter Pakistan's top universities by category, rankings, fees, programs and admission status." />
+<link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/style.css" />
+<style>
+  /* Custom styling for Category-First experience */
+  .category-card {
+    background: var(--card-bg, #ffffff);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  }
+  .category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+    border-color: var(--primary-color, #1e3a8a);
+  }
+  .category-icon-wrap {
+    width: 60px;
+    height: 60px;
+    border-radius: 14px;
+    background: rgba(30, 58, 138, 0.08);
+    color: var(--primary-color, #1e3a8a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .category-card:hover .category-icon-wrap {
+    background: var(--primary-color, #1e3a8a);
+    color: #ffffff;
+  }
+  .category-title {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+  }
+  .category-desc {
+    color: #64748b;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+  .category-count-pill {
+    font-size: 0.825rem;
+    font-weight: 600;
+    padding: 0.4rem 0.85rem;
+    border-radius: 50px;
+    background: #e0f2fe;
+    color: #0369a1;
+    display: inline-block;
+    width: fit-content;
+  }
+  .uni-actions-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  @media (max-width: 576px) {
+    .uni-actions-group {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<!-- NAV -->
+<nav class="navbar navbar-expand-xl fixed-top navbar-edu">
+  <div class="container">
+    <a class="navbar-brand" href="../index.html"><i class="bi bi-mortarboard-fill"></i> Smart Admission</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="nav-rows-container mx-auto">
+        <ul class="navbar-nav nav-row nav-row-1">
+          <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="universities.html">Universities</a></li>
+          <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+          <li class="nav-item"><a class="nav-link" href="compare.html">Compare</a></li>
+          <li class="nav-item"><a class="nav-link" href="recommendation.html">AI Recommendation</a></li>
+        </ul>
+        <ul class="navbar-nav nav-row nav-row-2">
+          <li class="nav-item"><a class="nav-link" href="scholarships.html">Scholarships</a></li>
+          <li class="nav-item"><a class="nav-link" href="campuslife.html">Campus Life</a></li>
+          <li class="nav-item"><a class="nav-link" href="notifications.html">Notifications</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center gap-2 auth-nav-btns">
+        <a href="#" class="nav-search me-1" title="Search"><i class="bi bi-search"></i></a>
+        <a href="#" class="btn btn-login"><i class="bi bi-person-circle me-1"></i>Sign In / Sign Up</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero" style="margin-top:76px">
+  <div class="container">
+    <h1 id="pageHeroTitle" data-aos="fade-up">University Categories</h1>
+    <p id="pageHeroSubtitle" data-aos="fade-up" data-aos-delay="100">Select a category to explore specialized universities in Pakistan.</p>
+    <nav>
+      <ol class="breadcrumb breadcrumb-edu" id="uniBreadcrumb">
+        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+        <li class="breadcrumb-item active" id="breadcrumbCategory">Universities</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- MAIN CONTENT AREA -->
+<section class="py-5">
+  <div class="container">
+    <!-- STAGE 1: CATEGORIES GRID VIEW -->
+    <div id="categoriesView">
+      <div class="row g-4" id="categoriesGrid">
+        <div class="text-center w-100 py-5">
+          <div class="loading-spinner"></div>
+          <p class="mt-3 text-muted">Loading University Categories...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STAGE 2: SELECTED CATEGORY UNIVERSITY LIST VIEW -->
+    <div id="universityListView" class="d-none">
+      <!-- Category Header & Back Button -->
+      <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+        <div>
+          <button class="btn btn-outline-secondary rounded-pill btn-sm mb-2" id="btnBackToCategories">
+            <i class="bi bi-arrow-left me-1"></i> Back to All Categories
+          </button>
+          <h2 class="mb-0 fw-bold" id="selectedCategoryHeading">Category Name</h2>
+        </div>
+      </div>
+
+      <!-- Search & Filters Bar -->
+      <div class="ai-card mb-4" data-aos="fade-up">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <input class="form-control" id="catSearchInput" placeholder="Search within category..." />
+          </div>
+          <div class="col-md-3">
+            <select class="form-select" id="catCitySelect">
+              <option value="">All Cities</option>
+            </select>
+          </div>
+          <div class="col-md-3">
+            <select class="form-select" id="catSectorSelect">
+              <option value="">All Sectors</option>
+              <option value="Public">Public</option>
+              <option value="Private">Private</option>
+              <option value="Semi-Government">Semi-Government</option>
+            </select>
+          </div>
+          <div class="col-md-2 d-md-flex">
+            <button class="btn btn-edu-primary w-100" id="catFilterBtn"><i class="bi bi-funnel me-1"></i> Filter</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Universities List Grid -->
+      <div class="row g-4" id="universitiesGrid">
+        <div class="text-center w-100 py-5">
+          <div class="loading-spinner"></div>
+          <p class="mt-3 text-muted">Loading Universities...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="brand"><i class="bi bi-mortarboard-fill"></i> EduNavigator</div>
+        <p style="opacity:.75">AI-powered university admission and comparison platform for students in Pakistan.</p>
+        <div class="socials mt-3"><a href="#"><i class="bi bi-facebook"></i></a><a href="#"><i class="bi bi-twitter-x"></i></a><a href="#"><i class="bi bi-instagram"></i></a><a href="#"><i class="bi bi-linkedin"></i></a></div>
+      </div>
+      <div class="col-6 col-lg-2"><h5>Quick Links</h5><a href="../index.html">Home</a><a href="universities.html">Universities</a><a href="admissions.html">Admissions</a><a href="compare.html">Compare</a><a href="scholarships.html">Scholarships</a></div>
+      <div class="col-6 col-lg-2"><h5>Support</h5><a href="contact.html">Contact</a><a href="notifications.html">Notifications</a><a href="apply.html">Apply</a><a href="recommendation.html">AI Recommendation</a></div>
+      <div class="col-lg-4"><h5>Subscribe</h5><p style="opacity:.75">Get admission alerts to your inbox.</p><form id="newsletterForm" class="newsletter d-flex mt-3"><input type="email" class="form-control" placeholder="Your email" required /><button class="btn"><i class="bi bi-send"></i></button></form></div>
+    </div>
+    <div class="bottom"><span>© 2026 EduNavigator. All rights reserved.</span><span><a href="#">Privacy</a><a href="#">Terms</a></span></div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="../js/script.js"></script>
+</body>
+</html>

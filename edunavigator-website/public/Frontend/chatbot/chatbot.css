@@ -1,0 +1,291 @@
+/* EduNavigator Floating Chatbot Widget Styles */
+#edubot-widget-wrapper {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 99999;
+  font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Floating Launcher Button */
+.edubot-launcher {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  border: 2px solid #38bdf8;
+  color: #38bdf8;
+  font-size: 1.5rem;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.5), 0 0 15px rgba(56, 189, 248, 0.3);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.edubot-launcher:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(15, 23, 42, 0.6), 0 0 20px rgba(56, 189, 248, 0.5);
+  border-color: #60a5fa;
+}
+
+.edubot-launcher.active {
+  transform: rotate(90deg);
+  background: #ef4444;
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+/* Chat Card Window Container */
+.edubot-container {
+  position: absolute;
+  bottom: 76px;
+  right: 0;
+  width: 380px;
+  height: 540px;
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.edubot-container.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+/* Inline Container Support */
+.edubot-container.edubot-inline {
+  position: relative;
+  bottom: auto;
+  right: auto;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+/* Header */
+.edubot-header {
+  padding: 16px 20px;
+  background: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edubot-bot-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.edubot-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.edubot-identity h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.edubot-status {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.edubot-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.edubot-action-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: color 0.2s;
+}
+
+.edubot-action-btn:hover {
+  color: #f8fafc;
+}
+
+/* Message Stream */
+.edubot-chat-history {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.edubot-msg-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 88%;
+}
+
+.edubot-msg-wrapper.user {
+  align-self: flex-end;
+}
+
+.edubot-msg-wrapper.bot {
+  align-self: flex-start;
+}
+
+.edubot-msg-bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  position: relative;
+  word-wrap: break-word;
+}
+
+.edubot-msg-wrapper.user .edubot-msg-bubble {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: #ffffff;
+  border-bottom-right-radius: 4px;
+}
+
+.edubot-msg-wrapper.bot .edubot-msg-bubble {
+  background: rgba(30, 41, 59, 0.9);
+  color: #f1f5f9;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom-left-radius: 4px;
+}
+
+.edubot-timestamp {
+  font-size: 0.7rem;
+  color: #64748b;
+  margin-top: 4px;
+  padding: 0 4px;
+}
+
+.edubot-msg-wrapper.user .edubot-timestamp {
+  text-align: right;
+}
+
+/* Typing animation */
+.edubot-typing-bubble {
+  align-self: flex-start;
+  background: rgba(30, 41, 59, 0.9);
+  padding: 12px 16px;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  gap: 4px;
+}
+
+.edubot-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  animation: edubotBounce 1.4s infinite ease-in-out both;
+}
+
+.edubot-dot:nth-child(1) { animation-delay: -0.32s; }
+.edubot-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes edubotBounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+
+/* Footer Input Bar */
+.edubot-footer {
+  padding: 14px 16px;
+  background: rgba(30, 41, 59, 0.8);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.edubot-input {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: #f8fafc;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.edubot-input:focus {
+  border-color: #38bdf8;
+}
+
+.edubot-send-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+  border: none;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.edubot-send-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Markdown Table inside Chat Bubble */
+.chat-table {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.chat-table th, .chat-table td {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.chat-table th {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
